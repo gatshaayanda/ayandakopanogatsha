@@ -26,8 +26,8 @@ export default function Header() {
           {[
             { label: 'Home', href: '/' },
             { label: 'About', href: '/about' },
-            { label: 'Projects', href: '/portfolio' },
-            { label: 'Experience', href: '/about#experience' },
+            { label: 'Projects', href: '/projects' },
+            { label: 'Experience', href: '/blog' },
             { label: 'Contact', href: '/contact' },
           ].map(({ label, href }) => (
             <Link
