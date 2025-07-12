@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import ProjectUpdates from '@/components/ProjectUpdates';
 
 export const metadata: Metadata = {
   title: 'Projects – Ayanda Kopano Gatsha',
@@ -11,33 +12,20 @@ export default function ProjectsPage() {
     {
       title: 'AdminHub Platform (MVP)',
       desc: 'A real-time client delivery system with project dashboards, file uploads, messaging, and multilingual support — built with Next.js, Firebase, Tailwind, and UploadThing.',
-      link: 'https://adhubmvp.vercel.app/',
+      link: 'https://adhubmvp.vercel.app/about',
+    },
+
+    {
+      title: 'CommissionCrowd work experience',
+      desc: 'A reference for Ayanda, a dedicated and valued independent contractor with Commission Crowd Limited for over 8.5 years.',
+      link: '/cc.pdf',
     },
     {
-      title: 'Custom CRM for Marketing Teams',
-      desc: 'Built a CRM with lead, contact, and note management, user assignment, global + per-user storage, and PDF export tools. Full admin overview and session-based auth.',
-      link: '/admin/marketing-overview',
-    },
-    {
-      title: 'Multilingual Blog System (KR/EN)',
-      desc: 'Blog reader and admin panel with automatic runtime translations, full blog CRUD, and SEO-optimized dynamic routes.',
-      link: '/blog',
-    },
-    {
-      title: 'Client Messaging System',
-      desc: 'Built secure per-project messaging between clients and admin with real-time Firestore updates and UploadThing file support.',
-      link: '/client/project/[id]',
-    },
-    {
-      title: 'E-commerce PWA Demo',
-      desc: 'Installable frontend app with mock store logic, used for training and onboarding clients. Built for mobile-first demos.',
-      link: 'https://texaspapa.vercel.app/',
-    },
-    {
-      title: 'Odin Portfolio (Offline-Ready)',
-      desc: 'Service worker-enhanced PWA featuring code examples, dev tools, and project showcase with manifest and offline support.',
-      link: '/odin',
-    },
+  title: 'Journalism & Media Highlights',
+  desc: 'Articles, interviews, and independent productions spanning Canada and Africa — including published writing, interview profiles, and farm-based animal training documentaries.',
+  link: '/media',
+},
+
   ];
 
   return (
@@ -67,6 +55,7 @@ export default function ProjectsPage() {
             </div>
           ))}
         </div>
+              <ProjectUpdates />
       </div>
     </section>
   );

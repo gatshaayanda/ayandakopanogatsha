@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Briefcase, Code, FileText } from 'lucide-react';
+import ProjectUpdates from '@/components/ProjectUpdates';
+
 
 export default function HomePage() {
   const [greeting, setGreeting] = useState('');
@@ -27,13 +29,13 @@ export default function HomePage() {
         </p>
         <div className="flex gap-4 flex-wrap justify-center">
           <Link
-            href="/portfolio"
+            href="/projects"
             className="btn-primary bg-[#5A4FFF] hover:bg-[#62A3E3] text-white px-6 py-2 rounded-full font-semibold"
           >
             🚀 View My Work
           </Link>
           <Link
-            href="/Ayanda_Kopano_CV.pdf"
+            href="/cv.pdf"
             className="btn-primary bg-[#62A3E3] hover:bg-[#5A4FFF] text-white px-6 py-2 rounded-full font-semibold"
           >
             📄 Download CV
@@ -92,6 +94,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+<ProjectUpdates />
+
 
       {/* CTA */}
       <section className="py-20 bg-[#0f172a] text-white text-center px-6">
