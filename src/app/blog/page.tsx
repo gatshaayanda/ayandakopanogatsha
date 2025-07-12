@@ -1,4 +1,3 @@
-// src/app/blog/page.tsx
 'use client';
 
 import Link from 'next/link';
@@ -7,11 +6,10 @@ import {
   collection,
   getDocs,
   query,
-  orderBy
+  orderBy,
 } from 'firebase/firestore';
 import { firestore } from '@/utils/firebaseConfig';
 
-// Define the shape of a blog post
 interface Blog {
   id: string;
   title: string;
@@ -19,55 +17,49 @@ interface Blog {
 }
 
 export default function BlogPage() {
-  const [posts, setPosts]   = useState<Blog[]>([]);
+  const [posts, setPosts] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
-      // Fetch all blogs in descending order of creation
       const snap = await getDocs(
-        query(
-          collection(firestore, 'blogs'),
-          orderBy('created_at', 'desc')
-        )
+        query(collection(firestore, 'blogs'), orderBy('created_at', 'desc'))
       );
       setPosts(
         snap.docs.map(doc => ({
           id: doc.id,
-          ...(doc.data() as Omit<Blog, 'id'>)
+          ...(doc.data() as Omit<Blog, 'id'>),
         }))
       );
       setLoading(false);
     })();
   }, []);
 
-  if (loading) {
-    return <p className="text-center py-20">Loading posts…</p>;
-  }
-
   return (
-    <main className="min-h-screen py-20 px-6 bg-[#F1F1F1] text-[#0B1A33]">
-           <section className="max-w-3xl mx-auto text-center space-y-6">
-        <h1 className="text-4xl font-bold">📰 Insights & Updates</h1>
-        <p className="text-[#4F5F7A]">
-          From product releases to case studies, this is where we share our thoughts, updates, and learnings.
+    <main className="min-h-screen py-24 px-6 bg-[#0f172a] text-white">
+      <section className="max-w-3xl mx-auto text-center space-y-6">
+        <h1 className="text-4xl font-bold">🧠 Experience Log</h1>
+        <p className="text-white/80">
+          These entries reflect real work — system builds, platform insights, client strategy, and what I’ve learned along the way.
         </p>
-
       </section>
-      <section className="max-w-3xl mx-auto space-y-6">
-        {posts.length === 0 ? (
-          <p className="italic text-center text-[#4F5F7A]">No posts currently..</p>
+
+      <section className="max-w-3xl mx-auto mt-12 space-y-6">
+        {loading ? (
+          <p className="text-center text-white/70">Loading entries…</p>
+        ) : posts.length === 0 ? (
+          <p className="italic text-center text-white/60">No entries yet.</p>
         ) : (
           <ul className="space-y-8">
             {posts.map(post => (
-              <li key={post.id} className="bg-white p-6 rounded shadow">
+              <li key={post.id} className="bg-[#1a1f36] p-6 rounded-xl border border-white/10">
                 <Link
                   href={`/blog/${post.id}`}
-                  className="text-2xl font-semibold text-blue-600 hover:underline"
+                  className="text-2xl font-semibold text-[#62A3E3] hover:underline"
                 >
                   {post.title}
                 </Link>
-                <p className="mt-2 text-sm text-[#4F5F7A]">
+                <p className="mt-2 text-sm text-white/60">
                   {new Date(post.created_at.seconds * 1000).toLocaleDateString()}
                 </p>
               </li>

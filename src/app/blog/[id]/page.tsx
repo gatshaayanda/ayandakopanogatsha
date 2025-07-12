@@ -13,8 +13,8 @@ interface Blog {
 
 export default function BlogPostPage() {
   const router = useRouter();
-  const path = usePathname();          // e.g. "/blog/abc123"
-  const id = path.split('/').pop()!;   // "abc123"
+  const path = usePathname();
+  const id = path.split('/').pop()!;
 
   const [post, setPost] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
@@ -24,39 +24,37 @@ export default function BlogPostPage() {
       try {
         const snap = await getDoc(doc(firestore, 'blogs', id));
         if (!snap.exists()) {
-          router.replace('/blog');
+          router.replace('/experience'); // updated path
           return;
         }
         setPost(snap.data() as Blog);
       } catch {
-        router.replace('/blog');
+        router.replace('/experience');
       } finally {
         setLoading(false);
       }
     })();
   }, [id, router]);
 
-  if (loading) {
-    return <p className="text-center py-20">Loading post…</p>;
-  }
-  if (!post) {
-    return <p className="text-center py-20">Post not found.</p>;
-  }
+  if (loading) return <p className="text-center py-20 text-white">Loading entry…</p>;
+  if (!post) return <p className="text-center py-20 text-white">Post not found.</p>;
 
   return (
-    <main className="min-h-screen py-20 px-6 bg-[#F1F1F1] text-[#0B1A33]">
-      <div className="max-w-3xl mx-auto space-y-6">
+    <main className="min-h-screen py-24 px-6 bg-[#0f172a] text-white">
+      <div className="max-w-3xl mx-auto space-y-8">
         <button
-          className="text-sm text-blue-600 hover:underline"
-          onClick={() => router.push('/blog')}
+          onClick={() => router.push('/experience')}
+          className="text-sm text-[#62A3E3] hover:underline"
         >
-          ← Back to Insights &amp; Updates
+          ← Back to Experience
         </button>
+
         <h1 className="text-4xl font-bold">{post.title}</h1>
-        <p className="text-gray-500 text-sm">
+        <p className="text-sm text-white/60">
           {new Date(post.created_at.seconds * 1000).toLocaleDateString()}
         </p>
-        <div className="prose max-w-none whitespace-pre-wrap">
+
+        <div className="prose prose-invert max-w-none whitespace-pre-wrap text-white/90">
           {post.body}
         </div>
       </div>

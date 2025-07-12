@@ -19,13 +19,13 @@ export default function AdminHubLoader() {
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-700 bg-gradient-to-br from-[#C9A43E] to-[#0F264B] ${
+      className={`fixed inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-700 bg-gradient-to-br from-[#5A4FFF] to-[#62A3E3] ${
         fading ? 'opacity-0' : 'opacity-100'
       }`}
     >
       <div className="relative flex items-center justify-center mb-6">
-        <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-white/40"></div>
-        <span className="absolute text-4xl font-extrabold text-white tracking-widest">AH</span>
+        <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-white/30"></div>
+        <span className="absolute text-4xl font-extrabold text-white tracking-widest">AK</span>
       </div>
       <span className="text-white font-medium animate-pulse text-sm tracking-wide">
         Loading your experience...
